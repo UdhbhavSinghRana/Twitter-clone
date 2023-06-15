@@ -69,6 +69,7 @@ model User {
     accounts      Account[]
     sessions      Session[]
 
+
     // non auth
     tweets        Tweet[]
     likes         Like[]
