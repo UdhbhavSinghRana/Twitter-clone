@@ -11,12 +11,12 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <SessionProvider session={session}>
+    <SessionProvider session={session} >
       <Head>
       <title>Twitter Clone</title>
       <meta name="description" content="This is a twitter clone" />
       </Head>
-      <div className="flex ">
+      <div className="flex bg-black text-slate-200">
         <SideNav />
         <div >
           <Component {...pageProps} />
