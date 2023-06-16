@@ -18,7 +18,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
       </Head>
       <div className="flex bg-black text-slate-200">
         <SideNav />
-        <div >
+        <div className="w-7/12">
           <Component {...pageProps} />
         </div>
       </div>
