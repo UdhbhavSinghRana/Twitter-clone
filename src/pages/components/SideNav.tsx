@@ -13,12 +13,12 @@ function SideNav() {
         <>
             <div className='border-r-2 border-slate-800 min-h-screen py-4 text-lg md:ml-40 w-1/6 '>
                 <div className='flex text-3xl pb-5'>
-                    <FiTwitter className='text-3xl'/>
+                    <FiTwitter className='text-3xl' />
                 </div>
                 <ul className='flex flex-col text-xl gap-6'>
                     <li>
                         <Link href='/' className='flex items-center gap-4'>
-                            <BiHomeCircle className='text-3xl'/>
+                            <BiHomeCircle className='text-3xl' />
                             <div>
                                 Home
                             </div>
@@ -27,7 +27,7 @@ function SideNav() {
                     {user != null && (
                         <li>
                             <div className='flex gap-4 items-center'>
-                                <AiOutlineProfile className='text-3xl'/>
+                                <AiOutlineProfile className='text-3xl' />
                                 Profile
                             </div>
                         </li>
@@ -40,7 +40,7 @@ function SideNav() {
 
                     ) : (
                         <li className='flex items-center gap-4'>
-                            <CiLogout className='text-3xl'/>
+                            <CiLogout className='text-3xl' />
                             <button onClick={() => void signOut()}>Log Out</button>
                         </li>
 

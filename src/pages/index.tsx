@@ -13,7 +13,7 @@ const Home: NextPage = () => {
         <Posts />
       </div>
     </>
-    );
+  );
 };
 
-      export default Home;
+export default Home;

@@ -13,8 +13,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session} >
       <Head>
-      <title>Twitter Clone</title>
-      <meta name="description" content="This is a twitter clone" />
+        <title>Twitter Clone</title>
+        <meta name="description" content="This is a twitter clone" />
       </Head>
       <div className="flex bg-black text-slate-200">
         <SideNav />
@@ -22,7 +22,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
           <Component {...pageProps} />
         </div>
       </div>
-      
+
     </SessionProvider>
   );
 };
