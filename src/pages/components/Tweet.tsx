@@ -3,12 +3,23 @@ import Image from 'next/image';
 import React, { use } from 'react'
 import { prisma } from '~/server/db';
 import TweetForm from './TweetForm';
-
+import { api } from '~/utils/api';
+import { useRouter } from 'next/router';
+import { useQuery } from '@tanstack/react-query';
+import EveryTweet from './EveryTweet';
+type Tweet = {
+    id: string;
+    content: string;
+    createdAt: Date;
+}
 function Tweet() {
     const userImage = useSession().data?.user?.image;
+    const getTweets = api.tweet.getTweets.useInfiniteQuery({}, { getNextPageParam: (lastPage) => { lastPage?.nextCursor } })
+    // console.log(getTweets.data?.pages)
     if (!userImage) {
         return <>Loading...</>;
     }
+
     return (
         <>
             <div className='flex w-2/3  border-r-2 border-b-2 border-slate-800'>
@@ -18,7 +29,13 @@ function Tweet() {
                 <div className='w-full pt-2'>
                     <TweetForm />
                     <div>
+                        {getTweets.data?.pages.map((page) => (
+                            page?.tweets.map((tweet) => (
+                                <EveryTweet key={tweet.id} tweets={tweet} />
+                            ))
+                        ))}
                     </div>
+
                 </div>
 
             </div>
