@@ -19,25 +19,25 @@ function Tweet() {
     if (!userImage) {
         return <>Loading...</>;
     }
-
+    const tweets = getTweets.data?.pages.flatMap((page) => page?.tweets) ?? [];
     return (
         <>
-            <div className='flex w-2/3  border-r-2 border-b-2 border-slate-800'>
-                <div className='p-4 '>
-                    <Image alt='image' src={userImage} width={50} height={50} quality={100} className='rounded-full' />
-                </div>
-                <div className='w-full pt-2'>
-                    <TweetForm />
-                    <div>
-                        {getTweets.data?.pages.map((page) => (
-                            page?.tweets.map((tweet) => (
-                                <EveryTweet key={tweet.id} tweets={tweet} />
-                            ))
-                        ))}
+            <div className=''>
+                <div className='flex w-2/3  border-r-2 border-b-2 border-slate-800'>
+                    <div className='p-4 '>
+                        <Image alt='image' src={userImage} width={50} height={50} quality={100} className='rounded-full' />
                     </div>
-
+                    <div className='w-full pt-2 flex-row'>
+                        <TweetForm />
+                    </div>
                 </div>
-
+                <div className='w-2/3'>
+                    <EveryTweet tweets={tweets}
+                        isError={getTweets.isError}
+                        isLoading={getTweets.isLoading}
+                        hasMore={getTweets.hasNextPage}
+                        fetchNewTweets={getTweets.fetchNextPage} />
+                </div>
             </div>
         </>
     )

@@ -35,7 +35,7 @@ function TweetForm() {
 
     return (
         <>
-            <form className='px-2 w- pt-4 ' onSubmit={handleSubmit}>
+            <form className='px-2 pt-4 ' onSubmit={handleSubmit}>
                 <textarea
                     placeholder="What's happening?!"
                     name="tweet"
