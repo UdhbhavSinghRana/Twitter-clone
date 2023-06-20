@@ -1,5 +1,6 @@
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { format, formatDistanceToNow } from 'date-fns';
 type Tweet = {
   id: string;
   content: string;
@@ -9,8 +10,8 @@ type Tweet = {
   user: {
     id: string;
     name: string | null;
-    image: string ;
-  } ;
+    image: string;
+  };
 }
 type ListProps = {
   tweets: Tweet[];
@@ -30,27 +31,28 @@ function EveryTweet({ tweets,
   if (tweets == null || tweets.length === 0) return <div>No tweets found...</div>;
   return (
     <>
-      <ul className='flex-row  w-full'>
-        <InfiniteScroll
-          dataLength={tweets.length}
-          next={fetchNewTweets}
-          hasMore={false}
-          loader={<h4>Loading...</h4>}
-        >
+      <ul className='flex-row h-full w-full'>
+        <div className='h-full'>
           {tweets.map((tweet: Tweet) => (
             <li key={tweet.id} className='p-3 gap-2 py-5 border-b-2 border-r-2 border-slate-800'>
               <div className='flex'>
-                <div><img src={tweet.user.image} width={40} height={50} className='rounded-full' /></div>
+                <div className='h-10 w-10'>
+                  <img src={tweet.user.image}  className='rounded-full h-10 w-10' />
+                </div>
                 <div className='flex-row px-2'>
-                  <div className=' font-bold'>{tweet.user.name}</div>
-                  <div>{tweet.content}</div>
+                  <div className='font-bold'>
+                    <div>{tweet.user.name} - {formatDistanceToNow(new Date(tweet.createdAt), { addSuffix: false, })}</div>
+                  </div>
+                  <p className='break-words'>{tweet.content}</p>
                 </div>
               </div>
             </li>
           ))}
-        </InfiniteScroll>
+        </div>
       </ul>
     </>
+
+
   )
 }
 

@@ -32,7 +32,7 @@ function Tweet() {
                         <TweetForm />
                     </div>
                 </div>
-                <div className='w-2/3'> 
+                <div className='w-2/3 h-full'> 
                     <EveryTweet tweets={tweets}         // tweets needs to be defined
                         isError={getTweets.isError}
                         isLoading={getTweets.isLoading}
