@@ -1,13 +1,27 @@
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { create } from 'domain';
 import { useSession } from 'next-auth/react';
 import React, { FormEvent, use, useEffect } from 'react'
 import { prisma } from '~/server/db';
 import { api } from '~/utils/api';
-
+import EveryTweet from './EveryTweet';
+type data = {
+    id: string;
+    content: string;
+    createdAt: Date;
+    user : {
+        id: string;
+        name: string | null;
+        image: string;
+    }
+    likeCount: number;
+    likedByMe: boolean;
+}
 
 function TweetForm() {
     const [inputValue, setInputValue] = React.useState('');
     const session = useSession();
+    const trpcUtils = api.useContext();
     if (session.status === 'loading') {
         return <div>Loading...</div>;
     }
@@ -16,14 +30,48 @@ function TweetForm() {
     }
     const createTweet = api.tweet.create.useMutation({
         onSuccess: (newTweet) => {
-            setInputValue('');
-            console.log(newTweet);
-        }
-    });
+          console.log(newTweet);
+          if (session.status !== 'authenticated') {
+            return;
+          }
+          if (newTweet == undefined) {
+            return;
+            }
+          trpcUtils.tweet.getTweets.setInfiniteData({}, (oldTweets: any ) => {          // old tweets needs to be change to some other type
+            if (oldTweets == null || oldTweets.pages[0] == null) return;
+            console.log(typeof oldTweets);
+            const newCacheTweet = {
+                id : newTweet.id,
+                content : newTweet.content,
+                createdAt : newTweet.createdAt,
+                user : {
+                    id : session.data.user?.id,
+                    name : session.data.user?.name,
+                    image : session.data.user?.image,
+                },
+                likeCount: 0,
+                likedByMe: false,
+            }
+            const updatedData = {
+              ...oldTweets,
+              pages: [
+                {
+                  ...oldTweets.pages[0],
+                  tweets: [newCacheTweet, ...oldTweets.pages[0].tweets],
+                },
+                ...oldTweets.pages.slice(1),
+              ],
+            };
+      
+            return updatedData;
+          });
+        },
+      });      
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
+        setInputValue('');
         createTweet.mutate({ content: inputValue });
-    }    
+    }
     useEffect(() => {
         const textarea = document.querySelector('textarea');
         textarea?.addEventListener('input', autoResize, false);

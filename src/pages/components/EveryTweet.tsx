@@ -8,9 +8,9 @@ type Tweet = {
   likedByMe: boolean;
   user: {
     id: string;
-    name: string;
-    image: string;
-  }
+    name: string | null;
+    image: string ;
+  } ;
 }
 type ListProps = {
   tweets: Tweet[];
@@ -18,23 +18,23 @@ type ListProps = {
   isError: boolean;
   hasMore: boolean | undefined;
   fetchNewTweets: () => Promise<unknown>;
-}
-
-
+};
 
 function EveryTweet({ tweets,
   isError,
   isLoading,
   fetchNewTweets,
   hasMore = false, }: ListProps) {
-  console.log(tweets);
+  if (isError) return <div>Error...</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (tweets == null || tweets.length === 0) return <div>No tweets found...</div>;
   return (
     <>
       <ul className='flex-row  w-full'>
         <InfiniteScroll
           dataLength={tweets.length}
-          next={() => { }}
-          hasMore={true}
+          next={fetchNewTweets}
+          hasMore={false}
           loader={<h4>Loading...</h4>}
         >
           {tweets.map((tweet: Tweet) => (

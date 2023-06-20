@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import React, { use } from 'react'
+import React, { use, useEffect } from 'react'
 import { prisma } from '~/server/db';
 import TweetForm from './TweetForm';
 import { api } from '~/utils/api';
@@ -15,10 +15,11 @@ type Tweet = {
 function Tweet() {
     const userImage = useSession().data?.user?.image;
     const getTweets = api.tweet.getTweets.useInfiniteQuery({}, { getNextPageParam: (lastPage) => { lastPage?.nextCursor } })
-    // console.log(getTweets.data?.pages)
+    
     if (!userImage) {
         return <>Loading...</>;
     }
+    
     const tweets = getTweets.data?.pages.flatMap((page) => page?.tweets) ?? [];
     return (
         <>
@@ -31,8 +32,8 @@ function Tweet() {
                         <TweetForm />
                     </div>
                 </div>
-                <div className='w-2/3'>
-                    <EveryTweet tweets={tweets}
+                <div className='w-2/3'> 
+                    <EveryTweet tweets={tweets}         // tweets needs to be defined
                         isError={getTweets.isError}
                         isLoading={getTweets.isLoading}
                         hasMore={getTweets.hasNextPage}

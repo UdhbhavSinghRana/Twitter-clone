@@ -7,7 +7,7 @@ import { link } from "fs";
 export const tweetRouter = createTRPCRouter({
   getTweets: publicProcedure
     .input(z.object({ limit: z.number().optional(), cursor: z.object({ id: z.string(), createdAt: z.date() }).optional() }))
-    .query(async ({ input: { limit = 10, cursor }, ctx }) => {
+    .query(async ({ input: { limit = 500, cursor }, ctx }) => {
       const currentUserId = ctx.session?.user.id;
       try {
         const tweets = await ctx.prisma.tweet.findMany({
@@ -27,12 +27,11 @@ export const tweetRouter = createTRPCRouter({
               }
             },
             likes: currentUserId == null ? false : { where: {userId: currentUserId} },
-
           },
         });
         let nextCursor : typeof cursor | undefined ;
         if (tweets.length > limit) {
-          const nextItem = tweets.pop();
+          const nextItem = tweets[limit + 1];
           if (nextItem) {
             nextCursor = { id: nextItem.id, createdAt: nextItem.createdAt };
           }
