@@ -43,7 +43,7 @@ function EveryTweet({ tweets,
                   <div className='font-bold'>
                     <div>{tweet.user.name} - {formatDistanceToNow(new Date(tweet.createdAt), { addSuffix: false, })}</div>
                   </div>
-                  <p className='break-words'>{tweet.content}</p>
+                  <p className='inline-block break-all'>{tweet.content}</p>
                 </div>
               </div>
             </li>
