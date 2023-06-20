@@ -1,6 +1,7 @@
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { format, formatDistanceToNow } from 'date-fns';
+import { ProfileImage } from './ProfileImage';
 type Tweet = {
   id: string;
   content: string;
@@ -36,8 +37,8 @@ function EveryTweet({ tweets,
           {tweets.map((tweet: Tweet) => (
             <li key={tweet.id} className='p-3 gap-2 py-5 border-b-2 border-r-2 border-slate-800'>
               <div className='flex'>
-                <div className='h-10 w-10'>
-                  <img src={tweet.user.image}  className='rounded-full h-10 w-10' />
+                <div className='h-10 w-10 mr-2'>
+                  <ProfileImage src={tweet.user.image} />
                 </div>
                 <div className='flex-row px-2'>
                   <div className='font-bold'>

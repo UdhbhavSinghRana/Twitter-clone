@@ -62,7 +62,6 @@ function TweetForm() {
                 ...oldTweets.pages.slice(1),
               ],
             };
-      
             return updatedData;
           });
         },
