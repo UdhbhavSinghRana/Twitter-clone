@@ -14,15 +14,15 @@ type Tweet = {
     createdAt: Date;
     user : {
         id: string;
-        name: string | null;
-        image: string | null;
+        name: string ;
+        image: string ;
     }
     likedByMe: boolean;
-} | any;            // change any to some other type
+    likeCount: number;
+} ;            // change any to some other type
 function Tweet() {
     const userImage = useSession().data?.user?.image;
     const getTweets  = api.tweet.getTweets.useInfiniteQuery({}, { getNextPageParam: (lastPage) => { lastPage?.nextCursor } })
-    
     if (!userImage) {
         return <>Loading...</>;
     }
@@ -30,7 +30,8 @@ function Tweet() {
         return;
     }
     
-    const tweets : Tweet[] = getTweets.data.pages.flatMap((page) => page?.tweets) ?? [];
+    const tweets: Tweet[] = (getTweets.data.pages ?? []).flatMap((page) => page?.tweets ?? []).filter((tweet): tweet is Tweet => tweet !== undefined);
+    console.log(tweets);
     return (
         <>
             <div className=''>
