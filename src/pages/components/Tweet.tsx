@@ -7,20 +7,30 @@ import { api } from '~/utils/api';
 import { useRouter } from 'next/router';
 import { useQuery } from '@tanstack/react-query';
 import EveryTweet from './EveryTweet';
+import { get } from 'http';
 type Tweet = {
     id: string;
     content: string;
     createdAt: Date;
-}
+    user : {
+        id: string;
+        name: string | null;
+        image: string | null;
+    }
+    likedByMe: boolean;
+} | any;            // change any to some other type
 function Tweet() {
     const userImage = useSession().data?.user?.image;
-    const getTweets = api.tweet.getTweets.useInfiniteQuery({}, { getNextPageParam: (lastPage) => { lastPage?.nextCursor } })
+    const getTweets  = api.tweet.getTweets.useInfiniteQuery({}, { getNextPageParam: (lastPage) => { lastPage?.nextCursor } })
     
     if (!userImage) {
         return <>Loading...</>;
     }
+    if (getTweets.data == undefined) {
+        return;
+    }
     
-    const tweets = getTweets.data?.pages.flatMap((page) => page?.tweets) ?? [];
+    const tweets : Tweet[] = getTweets.data.pages.flatMap((page) => page?.tweets) ?? [];
     return (
         <>
             <div className=''>
