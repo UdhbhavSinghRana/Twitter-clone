@@ -1,7 +1,7 @@
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { format, formatDistanceToNow } from 'date-fns';
-import { ProfileImage } from './ProfileImage';
+import ProfileImage from './ProfileImage';
 type Tweet = {
   id: string;
   content: string;
