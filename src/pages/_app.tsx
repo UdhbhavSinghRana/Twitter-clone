@@ -17,9 +17,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <title>Twitter Clone</title>
         <meta name="description" content="This is a twitter clone" />
       </Head>
-      <div className="flex bg-black text-slate-200">
+      <div className="md:flex-row md:flex bg-black text-slate-200">
         <SideNav />
-        <div className="w-7/12">
+        <div className="md:w-7/12">
           <Component {...pageProps} />
         </div>
       </div>

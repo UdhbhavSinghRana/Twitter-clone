@@ -63,6 +63,7 @@ function TweetForm() {
       });      
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
+        if(inputValue == '') return;
         setInputValue('');
         createTweet.mutate({ content: inputValue });
     }

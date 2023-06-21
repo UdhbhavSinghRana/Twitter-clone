@@ -11,10 +11,10 @@ const Home: NextPage = () => {
   return (
     <>
       <div className="flex">
-        <div className="w-2/3 ">
+        <div className="w-full lg:w-2/3">
           <Posts />
         </div>
-        <div className="w-1/3 p-2 sticky top-0">
+        <div className="w-0  p-2 sticky top-0 invisible lg:visible lg:w-1/3">
           <UsersPage />
         </div>
       </div>
