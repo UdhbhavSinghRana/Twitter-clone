@@ -25,9 +25,6 @@ function TweetForm() {
     if (session.status === 'loading') {
         return <div>Loading...</div>;
     }
-    else if (session.status !== 'authenticated') {
-        return <div>Access Denied</div>;
-    }
     const createTweet = api.tweet.create.useMutation({
         onSuccess: (newTweet) => {
           console.log(newTweet);

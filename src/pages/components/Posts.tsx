@@ -2,10 +2,13 @@ import React from 'react'
 import Tweet from './Tweet'
 import { useSession } from 'next-auth/react'
 import Explore from './Explore';
+import { api } from '~/utils/api';
 
 function Posts() {
   const session = useSession();
+  
   if (session.status === 'unauthenticated') {
+    
     return <Explore />;
   }
   return (

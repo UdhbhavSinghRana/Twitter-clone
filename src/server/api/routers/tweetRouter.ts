@@ -43,11 +43,12 @@ export const tweetRouter = createTRPCRouter({
             createdAt: tweet.createdAt,
             likeCount: tweet._count.likes,
             user: tweet.user,
-            likedByMe: tweet.likes.length > 0,
+            likedByMe: tweet.likes !== undefined && tweet.likes.length > 0,
           }
         }), nextCursor };
       } catch (error) {
-        console.log(error);
+        console.error("Error fetching tweets:", error);
+        throw error;
       }
 
     }),
@@ -72,7 +73,8 @@ export const tweetRouter = createTRPCRouter({
           throw new Error("User session not found");
         }
       } catch (error) {
-        console.log(error);
+        console.log("An error occurred:", error);
+        console.error(error);
       }
     }),
 });
