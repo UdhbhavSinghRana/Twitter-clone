@@ -27,7 +27,6 @@ function TweetForm() {
     }
     const createTweet = api.tweet.create.useMutation({
         onSuccess: (newTweet) => {
-          console.log(newTweet);
           if (session.status !== 'authenticated') {
             return;
           }
@@ -36,7 +35,6 @@ function TweetForm() {
             }
           trpcUtils.tweet.getTweets.setInfiniteData({}, (oldTweets: any ) => {          // old tweets needs to be change to some other type
             if (oldTweets == null || oldTweets.pages[0] == null) return;
-            console.log(typeof oldTweets);
             const newCacheTweet = {
                 id : newTweet.id,
                 content : newTweet.content,

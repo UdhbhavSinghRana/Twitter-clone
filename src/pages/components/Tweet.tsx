@@ -30,7 +30,6 @@ function Tweet() {
         return;
     }
     const tweets: Tweet[] = (getTweets.data.pages ?? []).flatMap((page) => page?.tweets ?? []).filter((tweet): tweet is Tweet => tweet !== undefined);
-    console.log(tweets);
     return (
         <>
             <div className=''>

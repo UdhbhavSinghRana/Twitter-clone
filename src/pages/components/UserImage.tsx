@@ -6,11 +6,11 @@ type ProfileImageProps = {
     className?: string;
   };
 
-function UserImag({ src, className = "" }: ProfileImageProps) {
+function UserImage({ src, className = "" }: ProfileImageProps) {
     return (
         <>
             <div
-                className={`relative h-12 w-12 overflow-hidden rounded-full ${className}`}
+                className={`relative h-10 w-10 overflow-hidden rounded-full ${className}`}
             >
                 {src == null ? (
                     <VscAccount className="h-full w-full" />
@@ -22,4 +22,4 @@ function UserImag({ src, className = "" }: ProfileImageProps) {
     )
 }
 
-export default UserImag
+export default UserImage
