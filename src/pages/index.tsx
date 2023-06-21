@@ -4,13 +4,19 @@ import Head from "next/head";
 import Link from "next/link";
 import { api } from "~/utils/api";
 import Posts from "./components/Posts";
+import UsersPage from "./components/UsersPage";
 
 const Home: NextPage = () => {
 
   return (
     <>
-      <div className="w-full">
-        <Posts />
+      <div className="flex">
+        <div className="w-2/3 ">
+          <Posts />
+        </div>
+        <div className="w-1/3 p-2">
+          <UsersPage />
+        </div>
       </div>
     </>
   );

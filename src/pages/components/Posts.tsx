@@ -13,7 +13,7 @@ function Posts() {
   }
   return (
     <>
-      <div className='p-3 text-xl font-bold border-r-2 border-b-2 border-slate-800 w-2/3 sticky top-0 backdrop-blur-lg z-10 '>
+      <div className='p-3 text-xl font-bold border-r-2 border-b-2 border-slate-800 w-full sticky top-0 backdrop-blur-lg z-10 '>
         Home
       </div>
       <Tweet />

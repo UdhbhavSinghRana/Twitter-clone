@@ -34,7 +34,7 @@ function Tweet() {
     return (
         <>
             <div className=''>
-                <div className='flex w-2/3  border-r-2 border-b-2 border-slate-800'>
+                <div className='flex w-full  border-r-2 border-b-2 border-slate-800'>
                     <div className='p-4 '>
                         <UserImag src={userImage} />
                     </div>
@@ -42,7 +42,7 @@ function Tweet() {
                         {session.status === 'authenticated' ? <TweetForm /> : null}
                     </div>
                 </div>
-                <div className='w-2/3 h-full'> 
+                <div className='w-full h-full'> 
                     <EveryTweet tweets={tweets}         
                         isError={getTweets.isError}
                         isLoading={getTweets.isLoading}
