@@ -35,7 +35,8 @@ function SideNav() {
 
                         )}
                         {user == null ? (
-                            <li>
+                            <li className='flex items-center gap-4'>
+                                <CiLogout className='text-3xl' />
                                 <button onClick={() => void signIn()}>Log in</button>
                             </li>
 
