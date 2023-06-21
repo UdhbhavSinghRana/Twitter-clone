@@ -12,13 +12,13 @@ function SideNav() {
     return (
         <>
             <div className='border-r-2 border-slate-800 min-h-screen py-4 text-lg md:ml-40 w-1/6 '>
-                <div className='fixed top-0 pt-4'>
-                    <div className='flex text-3xl pb-5'>
-                        <FiTwitter className='text-3xl' />
+                <div className='fixed top-0 pt-4 '>
+                    <div className='flex text-3xl pb-5 px-2'>
+                        <FiTwitter className='text-3xl ' />
                     </div>
-                    <ul className='flex flex-col text-xl gap-6'>
+                    <ul className='flex flex-col text-xl gap-3'>
                         <li>
-                            <Link href='/' className='flex items-center gap-4'>
+                            <Link href='/' className='flex items-center gap-4 hover:bg-[#1c1f23] p-2 rounded-full'>
                                 <BiHomeCircle className='text-3xl' />
                                 <div>
                                     Home
@@ -27,7 +27,7 @@ function SideNav() {
 
                         {user != null && (
                             <li>
-                                <div className='flex gap-4 items-center'>
+                                <div className='flex gap-4 items-center hover:bg-[#1c1f23] p-2 rounded-full'>
                                     <AiOutlineProfile className='text-3xl' />
                                     Profile
                                 </div>
@@ -35,13 +35,13 @@ function SideNav() {
 
                         )}
                         {user == null ? (
-                            <li className='flex items-center gap-4'>
+                            <li className='flex items-center gap-4 hover:bg-[#1c1f23] p-2 rounded-full'>
                                 <CiLogin className='text-3xl' />
                                 <button onClick={() => void signIn()}>Log in</button>
                             </li>
 
                         ) : (
-                            <li className='flex items-center gap-4'>
+                            <li className='flex items-center gap-4 hover:bg-[#1c1f23] p-2 rounded-full'>
                                 <CiLogout className='text-3xl' />
                                 <button onClick={() => void signOut()}>Log Out</button>
                             </li>

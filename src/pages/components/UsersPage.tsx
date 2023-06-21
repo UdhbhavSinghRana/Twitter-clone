@@ -22,14 +22,14 @@ function UsersPage() {
     }) ?? [];
     return (
         <div className='w-full rounded-lg bg-[#16181C]'>
-            <h1 className='text-xl font-bold p-2'>
+            <h1 className='text-xl font-bold p-2 '>
                 Who To follow
             </h1>
             <ul>
                 <li>
                     {allUsers?.map((user) => {
                         return (
-                            <div className='flex items-center justify-between p-2 hover:bg-[#292d35]'>
+                            <div className='flex items-center justify-between p-2 hover:bg-[#1c1f23] '>
                                 <div className='flex items-center'>
                                     <div className='pr-2'>
                                         <UserImage src={user.userImage} />

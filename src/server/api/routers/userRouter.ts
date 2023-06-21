@@ -7,7 +7,7 @@ import { link } from "fs";
 export const userRouter = createTRPCRouter({
   getUsers: publicProcedure
     .input(z.object({ limit: z.number().optional() }))
-    .query(async ({ input: { limit = 500 }, ctx }) => {
+    .query(async ({ input: { limit = 5 }, ctx }) => {
       try {
         const users = await ctx.prisma.user.findMany({
           take: limit,

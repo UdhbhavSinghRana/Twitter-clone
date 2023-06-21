@@ -14,7 +14,7 @@ const Home: NextPage = () => {
         <div className="w-2/3 ">
           <Posts />
         </div>
-        <div className="w-1/3 p-2">
+        <div className="w-1/3 p-2 sticky top-0">
           <UsersPage />
         </div>
       </div>
