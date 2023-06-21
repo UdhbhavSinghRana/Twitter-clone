@@ -3,8 +3,8 @@ import Link from 'next/link';
 import React, { use } from 'react'
 import { BiHomeCircle } from 'react-icons/bi';
 import { AiOutlineProfile } from 'react-icons/ai';
-import { CiLogout } from 'react-icons/ci';
-import { FiTwitter } from 'react-icons/fi';
+import { CiLogin, CiLogout } from 'react-icons/ci';
+import {  FiTwitter } from 'react-icons/fi';
 
 function SideNav() {
     const session = useSession();
@@ -36,7 +36,7 @@ function SideNav() {
                         )}
                         {user == null ? (
                             <li className='flex items-center gap-4'>
-                                <CiLogout className='text-3xl' />
+                                <CiLogin className='text-3xl' />
                                 <button onClick={() => void signIn()}>Log in</button>
                             </li>
 
