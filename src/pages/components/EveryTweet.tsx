@@ -29,7 +29,8 @@ function EveryTweet({ tweets,
   hasMore = false, }: ListProps) {
   if (isError) return <div>Error...</div>;
   if (isLoading) return <div>Loading...</div>;
-  if (tweets == null || tweets.length === 0) return <div>No tweets found...</div>;
+  if (tweets == null) return <div>Loading...</div>;
+  if (tweets.length === 0) return <div>No tweets found...</div>;
   return (
     <>
       <ul className='flex-row h-full w-full'>

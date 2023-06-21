@@ -8,6 +8,8 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@tanstack/react-query';
 import EveryTweet from './EveryTweet';
 import { get } from 'http';
+import UserImag from './UserImage';
+import Explore from './Explore';
 type Tweet = {
     id: string;
     content: string;
@@ -19,17 +21,14 @@ type Tweet = {
     }
     likedByMe: boolean;
     likeCount: number;
-} ;            // change any to some other type
+} ;           
 function Tweet() {
-    const userImage = useSession().data?.user?.image;
+    let userImage = useSession().data?.user?.image;
+    const session = useSession();
     const getTweets  = api.tweet.getTweets.useInfiniteQuery({}, { getNextPageParam: (lastPage) => { lastPage?.nextCursor } })
-    if (!userImage) {
-        return <>Loading...</>;
-    }
     if (getTweets.data == undefined) {
         return;
     }
-    
     const tweets: Tweet[] = (getTweets.data.pages ?? []).flatMap((page) => page?.tweets ?? []).filter((tweet): tweet is Tweet => tweet !== undefined);
     console.log(tweets);
     return (
@@ -37,14 +36,14 @@ function Tweet() {
             <div className=''>
                 <div className='flex w-2/3  border-r-2 border-b-2 border-slate-800'>
                     <div className='p-4 '>
-                        <Image alt='image' src={userImage} width={50} height={50} quality={100} className='rounded-full' />
+                        <UserImag src={userImage} />
                     </div>
                     <div className='w-full pt-2 flex-row'>
-                        <TweetForm />
+                        {session.status === 'authenticated' ? <TweetForm /> : null}
                     </div>
                 </div>
                 <div className='w-2/3 h-full'> 
-                    <EveryTweet tweets={tweets}         // tweets needs to be defined
+                    <EveryTweet tweets={tweets}         
                         isError={getTweets.isError}
                         isLoading={getTweets.isLoading}
                         hasMore={getTweets.hasNextPage}
