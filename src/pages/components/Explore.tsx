@@ -24,10 +24,10 @@ function Explore() {
     console.log(tweets);
     return (
         <>
-            <div className='p-2 text-xl font-bold border-r-2 border-slate-800 w-2/3 sticky top-0 bg-black bg-opacity-10 backdrop-blur-lg z-10' >
+            <div className='p-2 text-xl font-bold border-r-2 border-slate-800 w-full sticky top-0 bg-black bg-opacity-10 backdrop-blur-lg z-10' >
                 Explore 
             </div>
-            <div className='w-2/3 h-full'>
+            <div className='w-full h-full'>
                 <EveryTweet tweets={tweets}         
                     isError={getTweets.isError}
                     isLoading={getTweets.isLoading}

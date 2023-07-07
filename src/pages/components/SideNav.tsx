@@ -11,7 +11,7 @@ function SideNav() {
     const user = session?.data?.user;
     return (
         <>
-            <div className='border-r-2 border-slate-800  md:min-h-screen py-4 text-lg md:ml-40 md:w-1/6 '>
+            <div className='border-r-2 border-slate-800 w-10reb md:min-h-screen py-4 text-lg md:ml-40 md:w-1/6 '>
                 <div className='fixed top-0 pt-4 '>
                     <div className='flex text-3xl pb-5 px-2'>
                         <FiTwitter className='text-3xl ' />
