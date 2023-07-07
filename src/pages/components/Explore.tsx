@@ -24,7 +24,7 @@ function Explore() {
     console.log(tweets);
     return (
         <>
-            <div className='p-2 text-xl font-bold border-r-2 border-slate-800 w-full sticky top-0 bg-black bg-opacity-10 backdrop-blur-lg z-10' >
+            <div className=' md:p-2 md:m-0 m-10 text-xl font-bold border-r-2 border-slate-800 md:w-full md:sticky md:top-0 bg-black md:bg-opacity-10 backdrop-blur-lg md:z-10' >
                 Explore 
             </div>
             <div className='w-full h-full'>
